@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Doces</title>
+    <link rel="stylesheet" href="confeitaria.css">
+</head>
+<body>
+
+    <form action="tb_docesconfeitaria.php" method="post">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Informe o nome do doce" required>
+        </div>
+        <div>
+            <label for="descricao">Descrição:</label>
+            <input type="text" id="descricao" name="descricao" placeholder="Informe a descrição do doce" required>
+        </div>
+        <div>
+            <label for="ingredientes">Ingredientes:</label>
+            <input type="text" id="ingredientes" name="ingredientes" placeholder="Informe os ingredientes do doce" required>
+        </div>
+        <div>
+            <label for="categoria">Categoria:</label>
+            <input type="text" id="categoria" name="categoria" placeholder="Informe a categoria do doce" required>
+        </div>
+        <div>
+            <label for="valor">Valor:</label>
+            <input type="number" step="0.01" id="valor" name="valor" placeholder="Informe o valor do doce" required>
+        </div>
+        <button type="submit" name="cadastrar">Cadastrar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    <link rel="stylesheet" href="confeitaria.css">
+</head>
+<body>
+
+    <!--menu secundário carregado  -->
+    <iframe src="menu_secundario.html" width="100%" height="80" frameborder="0"></iframe>
+
+    <main>
+        <p>Para entrar em contato, preencha o formulário abaixo:</p>
+        <form id="contactForm">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Mensagem:</label>
+            <textarea id="message" name="message" required></textarea>
+            
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="formMessage" class="message"></div>
+    </main>
+
+    <script src="confeitaria.js"></script>
+</body>
+</html>

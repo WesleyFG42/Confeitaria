@@ -1,0 +1,135 @@
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F0F0F3; /* Fundo suave */
+    background-image: url('fundo.jpg'); /* Caminho da imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    color: #333; /* Cor do texto mais suave */
+    line-height: 1.6;
+}
+
+/* Estilos para a logo */
+.logo {
+    width: 75px; /* Tamanho da logo */
+    opacity: 0.52; /* deixa a logo transparente*/
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+/* Cabeçalho */
+header {
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente */
+    padding: 30px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave no cabeçalho */
+    text-align: center;
+    border-bottom: 2px solid #E8E8E8; /* Linha sutil abaixo do cabeçalho */
+}
+
+/* Estilos para o menu circular */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 600px; /* Ajuste para controlar o tamanho do menu */
+    height: 600px; /* Mantém o formato circular do conjunto */
+    border-radius: 50%; /* Cria um círculo grande envolvendo as imagens */
+    overflow: hidden;
+    margin: 50px auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra moderna */
+    position: relative;
+}
+
+/* Imagens individuais no menu */
+.imagem {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Transição suave */
+    border-radius: 10px; /* Cantos ligeiramente arredondados */
+}
+
+/* Efeito hover para as imagens do menu */
+.imagem:hover {
+    transform: scale(1.1); /* Aumenta a imagem levemente ao passar o mouse */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra ao passar o mouse */
+}
+
+/* Formulário de contato */
+form {
+    background-color: #FFFFFF;
+    padding: 20px;
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra moderna */
+    max-width: 600px;
+    margin: 20px auto;
+    font-size: 16px;
+}
+
+/* Botões Segundo Menu */
+button {
+    background-color: #802313; /* Cor de destaque  */
+    color: rgb(178, 180, 36);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px; /* Cantos arredondados */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #45A049; /* Cor levemente diferente ao passar o mouse */
+    transform: translateY(-3px); /* Efeito de botão subindo ao passar o mouse */
+}
+
+/* Links e navegação */
+a {
+    color: #3498db; /* Cor de destaque para links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2980b9; /* Cor mais escura ao passar o mouse */
+}
+
+/* Sombra e efeito para conteúdo */
+#conteudo {
+    padding: 20px;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+
+
+
+nav ul {
+    list-style-type: none; /* Remove os marcadores da lista */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Alinha os itens em linha */
+}
+
+nav li {
+    margin-right: 20px; /* Espaçamento entre os itens */
+}
+
+
+/* se caso eu quiser deixar espaço no menu principal entre as imagens tirar os comentarios
+nav a {
+    color: white; /* Cor do texto */
+ /*   text-decoration: none; /* Remove o sublinhado */
+  /*  padding: 10px 15px; /* Espaçamento interno */
+/* } */ 
+
+nav a:hover {
+    background-color: #555; /* Cor de fundo ao passar o mouse */
+    border-radius: 5px; /* Cantos arredondados */
+}
