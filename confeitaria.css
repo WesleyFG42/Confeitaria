@@ -3,19 +3,23 @@ body {
     margin: 0;
     padding: 0;
     background-color: #F0F0F3; /* Fundo suave */
-    background-image: url('fundo.jpg'); /* Caminho da imagem de fundo */
+    background-image: url('../confeitaria/imagens/fundo.jpg'); /* Caminho da imagem de fundo */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     color: #333; /* Cor do texto mais suave */
     line-height: 1.6;
+    display: flex; /* Usando Flexbox para facilitar o layout */
+    flex-direction: column; /* Direção vertical */
+    align-items: center; /* Centraliza horizontalmente */
+    min-height: 100vh; /* Garante que o body ocupe toda a altura da viewport */
 }
 
 /* Estilos para a logo */
 .logo {
     width: 75px; /* Tamanho da logo */
-    opacity: 0.52; /* deixa a logo transparente*/
+    opacity: 0.52; /* Deixa a logo transparente */
     height: auto;
     display: block;
     margin: 20px auto;
@@ -23,22 +27,25 @@ body {
 
 /* Cabeçalho */
 header {
-    background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente */
-    padding: 30px 0;
+    background-color: #ffffffe6; /* Fundo semi-transparente */
+    padding: 10px 0; 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave no cabeçalho */
     text-align: center;
-    border-bottom: 2px solid #E8E8E8; /* Linha sutil abaixo do cabeçalho */
+    border-bottom: 2px solid #e8e8e8; /* Linha sutil abaixo do cabeçalho */
 }
 
 /* Estilos para o menu circular */
 .galeria {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 15px;
     width: 600px; /* Ajuste para controlar o tamanho do menu */
     height: 600px; /* Mantém o formato circular do conjunto */
     border-radius: 50%; /* Cria um círculo grande envolvendo as imagens */
     overflow: hidden;
     margin: 50px auto;
+    background-color: #ffffff; /* Cor de fundo branca para contraste */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Sombra moderna */
     position: relative;
 }
@@ -58,9 +65,15 @@ header {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra ao passar o mouse */
 }
 
+.imagem img {
+    width: 100%; /* Faz a imagem ocupar 100% do contêiner */
+    height: 100%; /* Faz a imagem ocupar 100% do contêiner */
+    object-fit: cover; /* Cobre o contêiner */
+}
+
 /* Formulário de contato */
 form {
-    background-color: #FFFFFF;
+    background-color: #f3f3f3;
     padding: 20px;
     border-radius: 8px; /* Cantos arredondados */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra moderna */
@@ -78,7 +91,6 @@ button {
     border-radius: 5px; /* Cantos arredondados */
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição suave */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -89,27 +101,41 @@ button:hover {
 
 /* Links e navegação */
 a {
-    color: #3498db; /* Cor de destaque para links */
+    color: #ffffff; 
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #2980b9; /* Cor mais escura ao passar o mouse */
+    color: #ffffff; /* Cor mais escura ao passar o mouse */
 }
 
-/* Sombra e efeito para conteúdo */
+/* Conteúdo principal */
 #conteudo {
-    padding: 20px;
+    padding: 10px;
     background-color: #FFFFFF;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    border-radius: 18px; /* Cantos arredondados */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin: 20px; /* Espaço entre o conteúdo e a borda da página */
+    max-width: 800px; /* Limita a largura para melhor visualização */
+    flex-grow: 1; /* Permite que o conteúdo ocupe espaço */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo dentro da div */
 }
 
+/* Rodapé */
+footer {
+    background-color: #333; /* Cor de fundo do rodapé */
+    color: white;
+    padding: 10px; /* Ajuste do padding do rodapé */
+    text-align: center;
+    width: 100%; /* Garante que o rodapé ocupe toda a largura da página */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave para o rodapé */
+    margin-top: 20px; /* Espaço entre o conteúdo e o rodapé */
+}
 
-
-
+/* Estilos de navegação */
 nav ul {
     list-style-type: none; /* Remove os marcadores da lista */
     margin: 0;
@@ -121,13 +147,11 @@ nav li {
     margin-right: 20px; /* Espaçamento entre os itens */
 }
 
-
-/* se caso eu quiser deixar espaço no menu principal entre as imagens tirar os comentarios
 nav a {
-    color: white; /* Cor do texto */
- /*   text-decoration: none; /* Remove o sublinhado */
-  /*  padding: 10px 15px; /* Espaçamento interno */
-/* } */ 
+    color: rgb(66, 148, 214); /* Cor do texto */
+    text-decoration: none; /* Remove o sublinhado */
+    padding: 10px 15px; /* Espaçamento interno */
+}
 
 nav a:hover {
     background-color: #555; /* Cor de fundo ao passar o mouse */
