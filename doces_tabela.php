@@ -23,7 +23,7 @@ if (
     if ($_FILES['arquivo_foto']['error'] === UPLOAD_ERR_OK) {
         $extensao = strtolower(pathinfo($_FILES['arquivo_foto']['name'], PATHINFO_EXTENSION));
         $novo_nome = md5(time()) . '.' . $extensao;
-        $diretorio = "fotos/";
+        $diretorio = "imagens/";
 
         if (!is_dir($diretorio)) {
             mkdir($diretorio, 0755, true);
@@ -38,7 +38,7 @@ if (
 
             if ($resultadoDoces && mysqli_insert_id($conexao)) {
                 $_SESSION['msg'] = "<p>Doce cadastrado com sucesso.</p>";
-                header("Location: sucesso.php");
+                header("Location: doces_menu.html");
                 exit;
             } else {
                 $_SESSION['msg'] = "<p>Erro ao cadastrar o doce no banco de dados.</p>";
@@ -53,6 +53,6 @@ if (
     $_SESSION['msg'] = "<p>Erro: Todos os campos são obrigatórios.</p>";
 }
 
-header("Location: erro.php");
+header("Location: doces_menu.html");
 exit;
 ?>

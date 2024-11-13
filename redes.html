@@ -9,13 +9,18 @@
     <h3> A História do Café </h3>
     <link src="redes.html"></link>
 
-    <nav>
-        <ul>
-            <li><a href="Principal.html">Home</a></li>
-            <li><a href="receitas.html">Receitas</a></li>
-            <li><a href="Formulario.html">Cadastro</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
+    <header>
+        <img src="../confeitaria/imagens/logo.jpg" alt="Logo" class="logo">
+        <nav>
+            <div id="menu-container"></div>
+            <script>
+                fetch("menu_secundario.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("menu-container").innerHTML = data;
+                    });
+            </script>
+            
+        </nav>
 </body>
 </html>

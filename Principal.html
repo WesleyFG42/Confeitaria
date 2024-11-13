@@ -10,11 +10,15 @@
     <header>
         <img src="../confeitaria/imagens/logo.jpg" alt="Logo" class="logo">
         <nav>
-            <ul>
-                <li><a href="principal.html">Início</a></li>
-                <li><a href="menu_secundario.html">Menu</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
+<div id="menu-container"></div>
+<script>
+    fetch("menu_secundario.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("menu-container").innerHTML = data;
+        });
+</script>
+
         </nav>
     </header>
 

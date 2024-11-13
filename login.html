@@ -5,9 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="confeitaria.css">
-
 </head>
 <body>
+    <header>
+        <img src="../confeitaria/imagens/logo.jpg" alt="Logo" class="logo">
+        <nav>
+            <div id="menu-container"></div>
+            <script>
+                fetch("menu_secundario.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("menu-container").innerHTML = data;
+                    });
+            </script>
+            
+        </nav>
+
     <h1>Login</h1>
     <form action="login.php" method="POST">
         <label for="cpf">CPF:</label>

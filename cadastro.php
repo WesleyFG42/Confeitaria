@@ -3,43 +3,28 @@ include("conexao.php");
 session_start();
 
 // Entrada de dados vindos do HTML
-$cpf = isset($_POST['cpf']) ? $_POST['cpf'] : '';
-$celular = isset($_POST['celular']) ? $_POST['celular'] : '';
 $nome = isset($_POST['nome']) ? $_POST['nome'] : '';
-$email = isset($_POST['email']) ? $_POST['email'] : '';
-$data_nascimento = isset($_POST['datanascimento']) ? $_POST['datanascimento'] : '';
-$cidade = isset($_POST['cidade']) ? $_POST['cidade'] : '';
-$endereco = isset($_POST['endereco']) ? $_POST['endereco'] : '';
-$numeroCasa = isset($_POST['numeroCasa']) ? $_POST['numeroCasa'] : '';
-$senha = isset($_POST['senha']) ? $_POST['senha'] : '';
-$confirmarSenha = isset($_POST['confirmarSenha']) ? $_POST['confirmarSenha'] : '';
+$descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
+$ingredientes = isset($_POST['ingredientes']) ? $_POST['ingredientes'] : '';
+$categoria = isset($_POST['categoria']) ? $_POST['categoria'] : '';
+$valor = isset($_POST['valor']) ? $_POST['valor'] : '';
+$arquivo_foto = isset($_POST['arquivo_foto']) ? $_POST['arquivo_foto'] : '';
 
-// Verifica se algum dado não foi informado
-if (
-    empty($cpf) ||
-    empty($celular) || 
-    empty($nome) || 
-    empty($email) || 
-    empty($datanascimento) || 
-    empty($cidade) || 
-    empty($endereco) || 
-    empty($numeroCasa) || 
-    empty($senha) || 
-    empty($confirmarSenha)
-) {
-    echo "Por favor, preencha todos os campos.";
+// Verifica se os dados obrigatórios foram informados
+if (empty($nome)) {
+    echo "Por favor, preencha o nome do doce.";
     exit;
 }
 
 // Inserção no banco de dados
-$resultSqlCliente = "INSERT INTO tb_clientesconfeitaria (cpf, nome, celular, datanascimento, email, cidade, endereco, nrcasa, senha, confirmarsenha)
-VALUES ('$cpf', '$nome', '$celular', '$datanascimento', '$email', '$cidade', '$endereco', '$numeroCasa', '$senha', '$confirmarSenha')";
+$resultSqlDoces = "INSERT INTO tb_docesconfeitaria (nome, descricao, ingredientes, categoria, valor, arquivo_foto)
+VALUES ('$nome', '$descricao', '$ingredientes', '$categoria', '$valor', '$arquivo_foto')";
 
-$resultadoCliente = mysqli_query($conexao, $resultSqlCliente);
+$resultadoDoces = mysqli_query($conexao, $resultSqlDoces);
 
-if ($resultadoCliente) {
-    $_SESSION['msg'] = "<p>Cliente cadastrado com sucesso!</p>";
+if ($resultadoDoces) {
+    $_SESSION['msg'] = "<p>Doce cadastrado com sucesso!</p>";
 } else {
-    $_SESSION['msg'] = "<p>Erro ao cadastrar cliente: " . mysqli_error($conexao) . "</p>";
+    $_SESSION['msg'] = "<p>Erro ao cadastrar doce: " . mysqli_error($conexao) . "</p>";
 }
 ?>

@@ -53,6 +53,6 @@ if (
     $_SESSION['msg'] = "<p>Erro: Todos os campos são obrigatórios.</p>";
 }
 
-header("Location: erro.php");
+header("Location: doces_tabela.html");
 exit;
 ?>
