@@ -1,58 +1,48 @@
 <?php
 session_start();
-include("conexao.php");
+include("conexao.php"); // Inclui a conexão com o banco de dados
 
-if (
-    isset($_POST['nome']) && isset($_POST['descricao']) &&
-    isset($_POST['ingredientes']) && isset($_POST['categoria']) &&
-    isset($_POST['valor']) && isset($_FILES['arquivo_foto'])
-) {
+$query = "SELECT nome, descricao, ingredientes, categoria, valor, arquivo_foto FROM tb_docesconfeitaria"; // Consulta SQL para buscar os doces
+$result = mysqli_query($conexao, $query);
 
-    $nome = $_POST['nome'];
-    $descricao = $_POST['descricao'];
-    $ingredientes = $_POST['ingredientes'];
-    $categoria = $_POST['categoria'];
-    $valor = $_POST['valor'];
+if ($result && mysqli_num_rows($result) > 0) {
+    echo "<h1>Lista de Doces</h1>";
+    
+    // Início da tabela
+    echo "<table>";
+    echo "<thead><tr><th>Foto</th><th>Nome</th><th>Descrição</th><th>Ingredientes</th><th>Preço</th></tr></thead>";
+    echo "<tbody>";
 
-    if (empty($nome)) {
-        echo "Por favor, preencha o nome do doce.";
-        exit;
+    // Loop para exibir cada doce com suas informações
+    while ($row = mysqli_fetch_assoc($result)) {
+        $nome = htmlspecialchars($row['nome'], ENT_QUOTES, 'UTF-8');
+        $descricao = htmlspecialchars($row['descricao'], ENT_QUOTES, 'UTF-8');
+        $valor = number_format($row['valor'], 2, ',', '.'); // Formata o valor em formato de moeda
+        $ingredientes = htmlspecialchars($row['ingredientes'], ENT_QUOTES, 'UTF-8');
+        $arquivo_foto = $row['arquivo_foto'] ? "fotos/" . $row['arquivo_foto'] : "fotos/padrao.jpg"; // Verifica o caminho da foto
+
+        echo "<tr>";
+        
+        // Tornar a imagem clicável (link)
+        echo "<td><a href='#'>"; // Aqui você pode alterar o "#" para o link da página detalhada, se necessário
+        echo "<img src='$arquivo_foto' alt='$nome'>";
+        echo "</a></td>";
+        
+        echo "<td>$nome</td>";
+        echo "<td>$descricao</td>";
+        echo "<td>$ingredientes</td>";
+        echo "<td>R$ $valor</td>";
+        echo "</tr>";
     }
 
-    // Verifica se o arquivo foi enviado e se não houve erro
-    if ($_FILES['arquivo_foto']['error'] === UPLOAD_ERR_OK) {
-        $extensao = strtolower(pathinfo($_FILES['arquivo_foto']['name'], PATHINFO_EXTENSION));
-        $novo_nome = md5(time()) . '.' . $extensao;
-        $diretorio = "imagens/";
-
-        if (!is_dir($diretorio)) {
-            mkdir($diretorio, 0755, true);
-        }
-
-        if (move_uploaded_file($_FILES['arquivo_foto']['tmp_name'], $diretorio . $novo_nome)) {
-            $resultSqlDoces = "
-                INSERT INTO tb_docesconfeitaria (nome, descricao, ingredientes, categoria, valor, arquivo_foto)
-                VALUES ('$nome', '$descricao', '$ingredientes', '$categoria', '$valor', '$novo_nome')";
-
-            $resultadoDoces = mysqli_query($conexao, $resultSqlDoces);
-
-            if ($resultadoDoces && mysqli_insert_id($conexao)) {
-                $_SESSION['msg'] = "<p>Doce cadastrado com sucesso.</p>";
-                header("Location: doces_menu.html");
-                exit;
-            } else {
-                $_SESSION['msg'] = "<p>Erro ao cadastrar o doce no banco de dados.</p>";
-            }
-        } else {
-            $_SESSION['msg'] = "<p>Erro ao mover o arquivo de foto.</p>";
-        }
-    } else {
-        $_SESSION['msg'] = "<p>Nenhuma foto enviada ou erro no upload.</p>";
-    }
+    echo "</tbody>";
+    echo "</table>";
 } else {
-    $_SESSION['msg'] = "<p>Erro: Todos os campos são obrigatórios.</p>";
+    echo "<p>Nenhum doce cadastrado.</p>";
 }
 
-header("Location: doces_menu.html");
-exit;
+// Tratamento de erro em caso de falha na consulta
+if (!$result) {
+    echo "<p>Erro na consulta: " . mysqli_error($conexao) . "</p>";
+}
 ?>
