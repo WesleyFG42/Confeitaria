@@ -21,13 +21,13 @@
         </nav>
     </header>
 
-    <p>Venha conhecer os nossos deliciosos doces!</p>
-
-    <!-- Container onde a lista de doces será carregada -->
-    <div id="receitas-container"></div>
+    <main>
+        <h1>Nossas Receitas</h1>
+        <div id="receitas-container" class="lista-doces"></div>
+    </main>
 
     <script>
-        // Função para carregar o conteúdo de consultadoces.php
+        // Função para carregar receitas
         function carregarReceitas() {
             fetch('consultadoces.php')
                 .then(response => response.text())

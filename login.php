@@ -1,38 +1,38 @@
 <?php
 session_start();
 include("conexao.php");
-//verifica se campos validos
+
 if (isset($_POST['cpf']) && isset($_POST['senha'])) {
-    //entrada de dados vindos do HTML
-    $cpf = $_POST['cpf'];
-    $senha = $_POST['senha'];
-    //verifica se campos nao estão vazios
-    if (empty($cpf) || empty($senha)){
-        $_SESSION['msg'] = "<p> Preencha seus dados</p>";
+    $cpf = mysqli_real_escape_string($conexao, $_POST['cpf']);
+    $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
+
+    if (empty($cpf) || empty($senha)) {
+        $_SESSION['msg'] = "<p>Preencha todos os campos.</p>";
         header("Location: Principal.html");
         exit;
     }
- 
-    $resultQuery = " select * from tb_clientesconfeitaria where
-        cpf = '$cpf' and senha = '$senha'";
- 
-    $resultadoLogin = mysqli_query($conexao, $resultQuery);
-   
-    if (mysqli_num_rows($resultadoLogin) == 1) {
-       
-        $usuario = mysqli_fetch_assoc($resultadoLogin);
-        $_SESSION['cpf'] = $usuario['cpf'];
-        $_SESSION['senha'] = $usuario['senha'];
+
+    // Usar CPF como identificador único
+    $sql = "SELECT cpf, nome, senha FROM tb_clientesconfeitaria WHERE cpf = '$cpf' AND senha = '$senha'";
+    $resultado = mysqli_query($conexao, $sql);
+
+    if (mysqli_num_rows($resultado) == 1) {
+        $usuario = mysqli_fetch_assoc($resultado);
+
+        // Armazena o CPF e outros dados na sessão
+        $_SESSION['cliente_id'] = $usuario['cpf'];
+        $_SESSION['nome'] = $usuario['nome'];
+
         header("Location: Principal.html");
+        exit;
     } else {
-        // CPF ou senha incorretos
-        $_SESSION['msg'] = "CPF ou senha incorretos.";
+        $_SESSION['msg'] = "<p>CPF ou senha incorretos.</p>";
         header("Location: erro.html");
+        exit;
     }
 } else {
-    $_SESSION['msg'] = "Acesso inválido.";
+    $_SESSION['msg'] = "<p>Acesso inválido.</p>";
     header("Location: erro.html");
- 
- 
+    exit;
 }
 ?>

@@ -1,43 +1,44 @@
 <?php
 session_start();
-include("conexao.php"); // Inclui a conexão com o banco de dados
+include("conexao.php");
 
-$query = "SELECT nome, descricao, ingredientes, categoria, valor, arquivo_foto FROM tb_docesconfeitaria"; // Consulta SQL para buscar os doces
-$result = mysqli_query($conexao, $query);
+$sql = "SELECT id, nome, descricao, valor, arquivo_foto FROM tb_docesconfeitaria";
+$resultado = mysqli_query($conexao, $sql);
 
-if ($result && mysqli_num_rows($result) > 0) {
-    echo "<h1>Lista de Doces</h1>";
-    
-    // Início da tabela
-    echo "<table>";
-    echo "<thead><tr><th>Foto</th><th>Nome</th><th>Descrição</th><th>Ingredientes</th><th>Preço</th></tr></thead>";
-    echo "<tbody>";
-
-    // Loop para exibir cada doce com suas informações
-    while ($row = mysqli_fetch_assoc($result)) {
-        $nome = htmlspecialchars($row['nome'], ENT_QUOTES, 'UTF-8');
-        $descricao = htmlspecialchars($row['descricao'], ENT_QUOTES, 'UTF-8');
-        $valor = number_format($row['valor'], 2, ',', '.'); // Formata o valor em formato de moeda
-        $ingredientes = htmlspecialchars($row['ingredientes'], ENT_QUOTES, 'UTF-8');
-        $arquivo_foto = $row['arquivo_foto'] ? "fotos/" . $row['arquivo_foto'] : "fotos/padrao.jpg"; // Verifica o caminho da foto
-
-        echo "<tr>";
-        echo "<td><a href='#' class='open-modal' data-img='$arquivo_foto'><img src='$arquivo_foto' alt='$nome' style='width: 100px; height: 100px; object-fit: cover; border-radius: 10px;'></a></td>";
-        echo "<td>$nome</td>";
-        echo "<td>$descricao</td>";
-        echo "<td>$ingredientes</td>";
-        echo "<td>R$ $valor</td>";
-        echo "</tr>";
+if (mysqli_num_rows($resultado) > 0) {
+    while ($doce = mysqli_fetch_assoc($resultado)) {
+        echo "<div class='doce-item'>";
+        echo "<h2>{$doce['nome']}</h2>";
+        echo "<p>{$doce['descricao']}</p>";
+        echo "<p>Preço: R$" . number_format($doce['valor'], 2, ',', '.') . "</p>";
+        echo "<img src='fotos/{$doce['arquivo_foto']}' alt='{$doce['nome']}' />";
+        echo "<button class='btn-adicionar' data-id='{$doce['id']}'>Adicionar ao Carrinho</button>";
+        echo "</div>";
     }
-
-    echo "</tbody>";
-    echo "</table>";
 } else {
-    echo "<p>Nenhum doce cadastrado.</p>";
-}
-
-// Tratamento de erro em caso de falha na consulta
-if (!$result) {
-    echo "<p>Erro na consulta: " . mysqli_error($conexao) . "</p>";
+    echo "<p>Não há doces cadastrados.</p>";
 }
 ?>
+
+<script>
+    // Função JavaScript para adicionar ao carrinho
+    document.querySelectorAll('.btn-adicionar').forEach(button => {
+        button.addEventListener('click', function () {
+            const id = this.getAttribute('data-id');
+            fetch('adicionar_carrinho.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `id=${id}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Produto adicionado ao carrinho!');
+                } else {
+                    alert(data.message || 'Erro ao adicionar ao carrinho.');
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+        });
+    });
+</script>

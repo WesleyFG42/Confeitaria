@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Carrinho</title>
+    <link rel="stylesheet" href="confeitaria.css">
+    <script src="confeitaria.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.php">Início</a></li>
+                <li><a href="produtos.php">Nossas Receitas</a></li>
+                <li><a href="carrinho.php">Carrinho</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Seu Carrinho de Compras</h1>
+
+        <table class="carrinho-table">
+            <thead>
+                <tr>
+                    <th>Imagem</th>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+        </table>
+
+        <div class="total-carrinho">
+            <h3>Total: R$ <span id="total">0,00</span></h3>
+        </div>
+
+        <div class="actions">
+            <button onclick="window.location.href='produtos.php'">Continuar comprando</button>
+            <button onclick="window.location.href='finalizar_compra.php'">Finalizar compra</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Confeitaria. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Atualiza o total do carrinho com base nas quantidades
+        function atualizarTotal() {
+            let total = 0;
+            document.querySelectorAll('.quantidade').forEach(input => {
+                const quantidade = parseInt(input.value);
+                const preco = parseFloat(input.closest('tr').querySelectorAll('td')[2].textContent.replace('R$ ', '').replace(',', '.'));
+                total += quantidade * preco;
+            });
+            document.getElementById('total').textContent = total.toFixed(2).replace('.', ',');
+        }
+
+        // Chama a função sempre que a quantidade for alterada
+        document.querySelectorAll('.quantidade').forEach(input => {
+            input.addEventListener('change', atualizarTotal);
+        });
+
+        // Chama a função para inicializar o total
+        atualizarTotal();
+    </script>
+</body>
+</html>
