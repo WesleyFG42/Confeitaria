@@ -1,26 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Contato - Confeitaria</title>
+    <link rel="stylesheet" href="confeitaria.css">
 </head>
 <body>
-    <h3> A História do Café </h3>
-    <link src="redes.html"></link>
 
     <header>
         <img src="../confeitaria/imagens/logo.jpg" alt="Logo" class="logo">
-        <nav>
-            <div id="menu-container"></div>
-            <script>
-                fetch("menu_secundario.html")
-                    .then(response => response.text())
-                    .then(data => {
-                        document.getElementById("menu-container").innerHTML = data;
-                    });
-            </script>
-            
-        </nav>
+        <h1>Confeitaria Deliciosa</h1>
+    </header>
+
+    <nav>
+        <div id="menu-container"></div>
+        <script>
+            fetch("menu_secundario.html")
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("menu-container").innerHTML = data;
+                });
+        </script>
+    </nav>
+
+
+    <div class="contact-info contact-box">
+
+        <h3>Entre em Contato</h3>
+
+        <p>Tem alguma dúvida? Entre em contato conosco pelos seguintes meios:</p>
+
+        <div class="social-links">
+            <a href="#" target="_blank" title="Facebook">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" width="30">
+            </a>
+            <a href="#" target="_blank" title="Instagram">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="Instagram" width="30">
+            </a>
+        </div>
+
+        <p>Ou ligue para nós: <strong>(XX) XXXX-XXXX</strong></p>
+    </div>
+    
 </body>
 </html>
